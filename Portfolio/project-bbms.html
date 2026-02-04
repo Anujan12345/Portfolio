@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blood Bank Management System (BBMS) | Relational Database Solution | Anujan Ithayarajan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Medical/Healthcare Theme for BBMS Project */
+        :root {
+            --medical-red: #D32F2F;
+            --medical-blue: #1565C0;
+            --medical-light: #F5F5F5;
+            --medical-dark: #212121;
+        }
+
+        /* Project Header - Medical Theme */
+        .project-header {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            background: linear-gradient(135deg, rgba(211, 47, 47, 0.08), rgba(21, 101, 192, 0.08));
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .project-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, #D32F2F, #1565C0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+
+        .project-hero .tagline {
+            font-size: 1.2rem;
+            color: #D32F2F;
+            font-weight: 500;
+            margin-bottom: 20px;
+        }
+
+        .project-hero p {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(211, 47, 47, 0.1);
+            color: #D32F2F;
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(211, 47, 47, 0.3);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .badge:hover {
+            background: rgba(211, 47, 47, 0.2);
+            border-color: #D32F2F;
+            transform: translateY(-2px);
+        }
+
+        .badge i {
+            margin-right: 6px;
+        }
+
+        /* Main Content */
+        .project-detail {
+            padding: 60px 0;
+        }
+
+        .detail-section {
+            margin-bottom: 70px;
+        }
+
+        .detail-section h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #D32F2F;
+            position: relative;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .detail-section h2 i {
+            font-size: 1.8rem;
+        }
+
+        .detail-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, #D32F2F, #1565C0);
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            line-height: 1.9;
+        }
+
+        .section-content p {
+            margin-bottom: 18px;
+            font-size: 1rem;
+        }
+
+        .section-content h3 {
+            color: var(--text-primary);
+            margin-top: 35px;
+            margin-bottom: 18px;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1565C0;
+        }
+
+        .section-content ul {
+            list-style-position: inside;
+            margin-left: 10px;
+        }
+
+        .section-content li {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* Objectives Grid */
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+            margin: 35px 0;
+        }
+
+        .objective-card {
+            background: var(--card-bg);
+            border-left: 4px solid #D32F2F;
+            padding: 25px;
+            border-radius: 6px;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .objective-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.1);
+        }
+
+        .objective-card h4 {
+            color: #D32F2F;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .objective-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 25px;
+            margin: 35px 0;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 28px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #D32F2F, #1565C0);
+        }
+
+        .feature-card:hover {
+            border-color: #D32F2F;
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(211, 47, 47, 0.15);
+        }
+
+        .feature-card h4 {
+            color: #D32F2F;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.15rem;
+            font-weight: 600;
+        }
+
+        .feature-card i {
+            font-size: 1.4rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Architecture Components */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 28px;
+            margin: 35px 0;
+        }
+
+        .architecture-card {
+            background: linear-gradient(135deg, rgba(211, 47, 47, 0.05), rgba(21, 101, 192, 0.05));
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .architecture-card:hover {
+            border-color: #D32F2F;
+            box-shadow: 0 10px 30px rgba(211, 47, 47, 0.1);
+        }
+
+        .architecture-icon {
+            font-size: 3.5rem;
+            color: #D32F2F;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .architecture-card h4 {
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .architecture-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        /* Image Gallery */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .image-placeholder-box {
+            background: var(--card-bg);
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 360px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .image-placeholder-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #D32F2F, #1565C0);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .image-placeholder-box:hover {
+            border-color: #D32F2F;
+            background: rgba(211, 47, 47, 0.05);
+        }
+
+        .image-placeholder-box:hover::before {
+            opacity: 1;
+        }
+
+        .image-placeholder-box i {
+            font-size: 3.5rem;
+            color: #D32F2F;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+
+        .image-placeholder-box h4 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 1.15rem;
+        }
+
+        .image-placeholder-box p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .upload-note {
+            display: inline-block;
+            background: rgba(211, 47, 47, 0.1);
+            color: #D32F2F;
+            padding: 8px 15px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            margin-top: 10px;
+            border: 1px solid rgba(211, 47, 47, 0.2);
+        }
+
+        /* Tech Stack Section */
+        .tech-stack-container {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 35px;
+            margin: 35px 0;
+        }
+
+        .tech-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .tech-item {
+            background: rgba(211, 47, 47, 0.08);
+            border-left: 3px solid #D32F2F;
+            padding: 20px;
+            border-radius: 4px;
+        }
+
+        .tech-item h5 {
+            color: #D32F2F;
+            margin-bottom: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .tech-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Specifications Table */
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 35px 0;
+            background: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .specs-table th {
+            background: linear-gradient(135deg, rgba(211, 47, 47, 0.15), rgba(21, 101, 192, 0.15));
+            border: 1px solid var(--border-color);
+            padding: 18px;
+            text-align: left;
+            color: #D32F2F;
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        .specs-table td {
+            border: 1px solid var(--border-color);
+            padding: 18px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .specs-table tr:nth-child(even) {
+            background: rgba(211, 47, 47, 0.02);
+        }
+
+        .specs-table strong {
+            color: var(--text-primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .project-hero h1 {
+                font-size: 2rem;
+            }
+
+            .project-hero .tagline {
+                font-size: 1rem;
+            }
+
+            .detail-section h2 {
+                font-size: 1.6rem;
+            }
+
+            .objectives-grid,
+            .features-grid,
+            .architecture-grid,
+            .tech-stack-grid,
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-meta {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .badge {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #D32F2F;
+            text-decoration: none;
+            margin-bottom: 30px;
+            transition: var(--transition);
+            font-weight: 600;
+        }
+
+        .back-button:hover {
+            gap: 12px;
+            color: #1565C0;
+        }
+
+        .back-button i {
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, rgba(211, 47, 47, 0.08), rgba(21, 101, 192, 0.08));
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            padding: 60px 0;
+            margin-top: 60px;
+        }
+
+        .cta-content {
+            text-align: center;
+        }
+
+        .cta-content h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--text-primary);
+        }
+
+        .cta-content p {
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-btn {
+            padding: 13px 32px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            display: inline-block;
+            font-size: 1rem;
+        }
+
+        .cta-btn-primary {
+            background: linear-gradient(135deg, #D32F2F, #1565C0);
+            color: white;
+        }
+
+        .cta-btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(211, 47, 47, 0.3);
+        }
+
+        .cta-btn-secondary {
+            border: 2px solid #D32F2F;
+            color: #D32F2F;
+            background: transparent;
+        }
+
+        .cta-btn-secondary:hover {
+            background: rgba(211, 47, 47, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Anujan</div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#experience" class="nav-link">Experience</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <section class="project-header">
+        <div class="container">
+            <a href="index.html#projects" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            <div class="project-hero">
+                <h1>🩸 Blood Bank Management System</h1>
+                <p class="tagline">A Robust Relational Database Solution for Life-Saving Healthcare Operations</p>
+                <p>
+                    A sophisticated MySQL-based database system that streamlines blood donation logistics, 
+                    ensures inventory accuracy, and connects hospitals with blood banks for efficient resource management.
+                </p>
+                <div class="project-meta">
+                    <span class="badge"><i class="fas fa-database"></i> MySQL</span>
+                    <span class="badge"><i class="fas fa-code"></i> SQL</span>
+                    <span class="badge"><i class="fas fa-sitemap"></i> Relational Database</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Project Content -->
+    <section class="project-detail">
+        <div class="container">
+            <!-- Project Overview -->
+            <div class="detail-section">
+                <h2><i class="fas fa-heart"></i> Project Overview</h2>
+                <div class="section-content">
+                    <p>
+                        The Blood Bank Management System (BBMS) is a sophisticated MySQL-based relational database designed 
+                        to streamline the complex logistics of blood donation and distribution. By centralizing data for donors, 
+                        patients, hospitals, and blood inventory, the system ensures that life-saving resources are tracked accurately 
+                        and delivered efficiently.
+                    </p>
+                    <p>
+                        This comprehensive system addresses critical challenges in healthcare supply chain management, including 
+                        donor eligibility tracking, blood inventory management, hospital connectivity, and emergency response coordination. 
+                        Built on professional DBMS principles, it ensures data integrity through strict relational constraints and 
+                        normalization while providing powerful query capabilities for operational insights.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Key Objectives -->
+            <div class="detail-section">
+                <h2><i class="fas fa-bullseye"></i> Key Objectives</h2>
+                <div class="section-content">
+                    <p>
+                        The BBMS system is architected around core objectives that ensure optimal healthcare resource management 
+                        and operational efficiency.
+                    </p>
+                </div>
+                <div class="objectives-grid">
+                    <div class="objective-card">
+                        <h4><i class="fas fa-boxes"></i> Inventory Tracking</h4>
+                        <p>
+                            Real-time monitoring of available blood groups and components with automatic alerts 
+                            for critical stock levels.
+                        </p>
+                    </div>
+                    <div class="objective-card">
+                        <h4><i class="fas fa-users"></i> Stakeholder Management</h4>
+                        <p>
+                            Comprehensive records for Donors, Patients, Hospitals, and Analysts with role-based 
+                            access control and authentication.
+                        </p>
+                    </div>
+                    <div class="objective-card">
+                        <h4><i class="fas fa-chart-line"></i> Operational Excellence</h4>
+                        <p>
+                            Management of blood donation camps and hospital supply chains with performance metrics 
+                            and analytical insights.
+                        </p>
+                    </div>
+                    <div class="objective-card">
+                        <h4><i class="fas fa-shield-alt"></i> Data Integrity</h4>
+                        <p>
+                            Strict enforcement of relational constraints and normalization to prevent data redundancy 
+                            and ensure consistency.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical Architecture -->
+            <div class="detail-section">
+                <h2><i class="fas fa-layer-group"></i> Technical Architecture</h2>
+                <div class="section-content">
+                    <p>
+                        The system is built on a foundation of professional DBMS principles, featuring a multi-layered 
+                        architecture from conceptual design through implementation.
+                    </p>
+                </div>
+                <div class="architecture-grid">
+                    <div class="architecture-card">
+                        <div class="architecture-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h4>Conceptual Design</h4>
+                        <p>
+                            Detailed ER Modeling featuring cardinality constraints, entity relationships, and complex 
+                            business logic representation for comprehensive data modeling.
+                        </p>
+                    </div>
+                    <div class="architecture-card">
+                        <div class="architecture-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <h4>Relational Schema</h4>
+                        <p>
+                            Normalized Relational Schema implemented in MySQL with primary keys, foreign keys, and 
+                            constraint definitions for data consistency.
+                        </p>
+                    </div>
+                    <div class="architecture-card">
+                        <div class="architecture-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h4>Advanced Logic</h4>
+                        <p>
+                            Utilization of Views, Joins, Aggregations, Subqueries, and Stored Procedures for deep 
+                            data analysis and reporting.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Core Features -->
+            <div class="detail-section">
+                <h2><i class="fas fa-star"></i> Core Features</h2>
+                <div class="section-content">
+                    <p>
+                        The BBMS provides comprehensive functionality across all aspects of blood bank operations 
+                        and healthcare logistics.
+                    </p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-check-circle"></i> Donor Eligibility Logic</h4>
+                        <p>
+                            Automated tracking of donor health status, eligibility criteria, and donation history. 
+                            Enforces medical guidelines to ensure safe blood collection.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-hospital"></i> Emergency Connectivity</h4>
+                        <p>
+                            Many-to-Many mapping between Hospitals and Blood Banks enabling rapid resource sourcing 
+                            and emergency blood supply coordination.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-lock"></i> Secure Access</h4>
+                        <p>
+                            Multi-table user authentication with role-based access control. Classifies users by 
+                            work-title and manages permissions at database level.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-file-alt"></i> Comprehensive Reporting</h4>
+                        <p>
+                            Custom SQL views for inventory summaries, camp performance analytics, donation trends, 
+                            and hospital demand forecasting.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-blood-droplet"></i> Blood Group Tracking</h4>
+                        <p>
+                            Precise tracking of all blood groups (O, A, B, AB) and components (RBC, Plasma, Platelets) 
+                            with expiration date management.
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-search"></i> Advanced Queries</h4>
+                        <p>
+                            Complex SQL queries utilizing joins, aggregations, and subqueries for donor eligibility checks, 
+                            inventory optimization, and performance analysis.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Database Schema Design -->
+            <div class="detail-section">
+                <h2><i class="fas fa-database"></i> Database Schema Design</h2>
+                <div class="section-content">
+                    <h3>Normalization & Integrity</h3>
+                    <p>
+                        The database follows Third Normal Form (3NF) principles ensuring data consistency, 
+                        eliminating redundancy, and maintaining referential integrity.
+                    </p>
+                    <ul>
+                        <li><strong>Primary Keys:</strong> Unique identifiers for each entity (Donors, Patients, Hospitals, Blood Banks, Inventory)</li>
+                        <li><strong>Foreign Keys:</strong> Enforce relationships between tables and maintain referential integrity</li>
+                        <li><strong>Check Constraints:</strong> Validate blood groups, component types, and eligibility criteria</li>
+                        <li><strong>Default Values:</strong> Automatic timestamps for donations and transactions</li>
+                        <li><strong>Indexes:</strong> Optimized for frequently queried columns (Donor ID, Blood Group, Hospital ID)</li>
+                    </ul>
+
+                    <h3>Key Entities</h3>
+                    <table class="specs-table">
+                        <tr>
+                            <th>Entity</th>
+                            <th>Primary Purpose</th>
+                            <th>Key Attributes</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Donor</strong></td>
+                            <td>Manages blood donor information and eligibility</td>
+                            <td>ID, Name, Blood Group, Health Status, Last Donation Date</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Patient</strong></td>
+                            <td>Tracks patients requiring blood transfusions</td>
+                            <td>ID, Name, Hospital, Blood Group Required, Status</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Hospital</strong></td>
+                            <td>Manages hospital information and connections</td>
+                            <td>ID, Name, Location, Contact, Demand Level</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Blood Bank</strong></td>
+                            <td>Central inventory management facility</td>
+                            <td>ID, Name, Location, Capacity, Stock Level</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Inventory</strong></td>
+                            <td>Tracks blood components and expiration</td>
+                            <td>ID, Blood Group, Component Type, Quantity, Collection Date, Expiry Date</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Camp</strong></td>
+                            <td>Organizes blood donation camps</td>
+                            <td>ID, Location, Date, Expected Donors, Collected Units</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Visual Design -->
+            <div class="detail-section">
+                <h2><i class="fas fa-images"></i> System Design Visualization</h2>
+                <div class="section-content">
+                    <p>
+                        The following visual representations showcase the system's conceptual design, physical implementation, 
+                        and analytical capabilities.
+                    </p>
+                </div>
+                <div class="image-grid">
+                    <div class="image-placeholder-box">
+                        <img src="images/Blood_01.jpg" alt="Experimental Setup" style="width: 100%; border-radius: 8px; display: block;">
+                        <h4>ER Diagram</h4>
+                        <p>
+                            Conceptual Design showing entity relationships, cardinality constraints, and the complete 
+                            data model for the BBMS system.
+                        </p>
+                        
+                    </div>
+                    <div class="image-placeholder-box">
+                        <img src="images/Blood_02.jpg" alt="Experimental Setup" style="width: 100%; border-radius: 8px; display: block;">
+                        <h4>Relational Schema</h4>
+                        <p>
+                            Physical Design displaying normalized tables, primary/foreign key relationships, 
+                            and complete schema implementation.
+                        </p>
+                        
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Tech Stack -->
+            <div class="detail-section">
+                <h2><i class="fas fa-tools"></i> Technology Stack</h2>
+                <div class="tech-stack-container">
+                    <div class="tech-stack-grid">
+                        <div class="tech-item">
+                            <h5><i class="fas fa-database"></i> Database Management</h5>
+                            <p>
+                                <strong>MySQL:</strong> Open-source relational database system for data storage, 
+                                retrieval, and management with ACID compliance.
+                            </p>
+                        </div>
+                        <div class="tech-item">
+                            <h5><i class="fas fa-code"></i> Query Language</h5>
+                            <p>
+                                <strong>SQL (Structured Query Language):</strong> Comprehensive querying for data 
+                                manipulation, views, and complex analytical operations.
+                            </p>
+                        </div>
+                        <div class="tech-item">
+                            <h5><i class="fas fa-wrench"></i> Development Tools</h5>
+                            <p>
+                                <strong>MySQL Workbench:</strong> Visual database design and administration with 
+                                forward and reverse engineering capabilities.
+                            </p>
+                        </div>
+                        <div class="tech-item">
+                            <h5><i class="fas fa-globe"></i> Management Interface</h5>
+                            <p>
+                                <strong>phpMyAdmin:</strong> Web-based MySQL administration tool for database 
+                                management and SQL query execution.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Implementation Highlights -->
+            <div class="detail-section">
+                <h2><i class="fas fa-lightbulb"></i> Implementation Highlights</h2>
+                <div class="section-content">
+                    <h3>Advanced SQL Features</h3>
+                    <ul>
+                        <li><strong>Complex Joins:</strong> Multi-table joins for comprehensive data retrieval across Donors, Patients, Hospitals, and Inventory</li>
+                        <li><strong>Aggregation Queries:</strong> COUNT, SUM, AVG operations for inventory analysis and donation statistics</li>
+                        <li><strong>Subqueries:</strong> Nested queries for eligibility verification and demand forecasting</li>
+                        <li><strong>Views:</strong> Pre-defined views for inventory summaries, donor eligibility, and camp performance</li>
+                        <li><strong>Stored Procedures:</strong> Automated workflows for donations, inventory updates, and transfusion tracking</li>
+                    </ul>
+
+                    <h3>Data Integrity Features</h3>
+                    <ul>
+                        <li><strong>Referential Constraints:</strong> Ensure valid relationships between donors, patients, and hospitals</li>
+                        <li><strong>Unique Constraints:</strong> Prevent duplicate entries for donor IDs and hospital codes</li>
+                        <li><strong>Check Constraints:</strong> Validate blood groups and donation intervals</li>
+                        <li><strong>Triggers:</strong> Automatic updates to inventory and donor eligibility status</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="detail-section">
+                <h2><i class="fas fa-use-case-scenarios"></i> Real-World Use Cases</h2>
+                <div class="section-content">
+                    <h3>Emergency Blood Request</h3>
+                    <p>
+                        When a hospital requires blood urgently, the system can query available inventory across 
+                        all connected blood banks, identify compatible donors for emergency collection, and coordinate 
+                        rapid distribution.
+                    </p>
+
+                    <h3>Inventory Optimization</h3>
+                    <p>
+                        Automated reports track blood group distribution across banks, identify slow-moving inventory, 
+                        and generate alerts for approaching expiration dates to minimize waste.
+                    </p>
+
+                    <h3>Donor Eligibility Assessment</h3>
+                    <p>
+                        The system automatically evaluates donor eligibility based on health records, donation frequency, 
+                        and time since last donation, ensuring compliance with medical guidelines.
+                    </p>
+
+                    <h3>Camp Performance Analysis</h3>
+                    <p>
+                        Generate comprehensive reports on donation camps including donor turnout, collection efficiency, 
+                        blood group distribution, and ROI analysis.
+                    </p>
+
+                    <h3>Hospital Demand Forecasting</h3>
+                    <p>
+                        Historical data analysis helps predict blood demand patterns, enabling proactive inventory 
+                        management and resource allocation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Interested in Database Solutions?</h2>
+                <p>
+                    This Blood Bank Management System demonstrates advanced relational database design, 
+                    normalization principles, and SQL expertise. Whether you need a database system for 
+                    healthcare, inventory management, or complex business operations, I can help design and implement 
+                    robust solutions.
+                </p>
+                <div class="cta-buttons">
+                    <a href="index.html#contact" class="cta-btn cta-btn-primary">
+                        Get In Touch
+                    </a>
+                    <a href="index.html#projects" class="cta-btn cta-btn-secondary">
+                        View Other Projects
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: var(--darker-bg); border-top: 1px solid var(--border-color); padding: 40px 0; margin-top: 60px;">
+        <div class="container">
+            <div style="text-align: center; color: var(--text-secondary);">
+                <p>&copy; 2024 Anujan Ithayarajan. All rights reserved.</p>
+                <p style="margin-top: 10px; font-size: 0.9rem;">
+                    <a href="index.html" style="color: #D32F2F; text-decoration: none; transition: var(--transition); font-weight: 600;">← Back to Portfolio</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

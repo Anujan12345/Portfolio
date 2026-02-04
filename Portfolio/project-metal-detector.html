@@ -1,0 +1,1379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart LC Resonant Metal Detector with ML Classification | Anujan Ithayarajan</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* Project Detail Page Styles */
+        .project-header {
+            padding-top: 120px;
+            padding-bottom: 60px;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(120, 58, 237, 0.1));
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .project-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .project-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .project-hero .subtitle {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .project-hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .project-meta {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .meta-item i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .meta-item span {
+            color: var(--text-secondary);
+        }
+
+        /* Main Content */
+        .project-detail {
+            padding: 60px 0;
+        }
+
+        .detail-section {
+            margin-bottom: 60px;
+        }
+
+        .detail-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .detail-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+        }
+
+        .section-content {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .section-content p {
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .section-content h3 {
+            color: var(--text-primary);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.1);
+            transform: translateY(-5px);
+        }
+
+        .feature-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feature-card i {
+            font-size: 1.3rem;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Content with Image */
+        .content-with-image {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin: 40px 0;
+        }
+
+        .content-text {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .content-text h4 {
+            color: var(--text-primary);
+            margin-top: 20px;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .content-text ul {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .content-text li {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+        }
+
+        .content-image {
+            background: var(--card-bg);
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 350px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .content-image:hover {
+            border-color: var(--primary-color);
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .content-image i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            opacity: 0.7;
+        }
+
+        .content-image h4 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .content-image p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        /* Mathematics Formula Display */
+        .formula-box {
+            background: var(--card-bg);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 4px;
+            padding: 25px;
+            margin: 30px 0;
+            overflow-x: auto;
+        }
+
+        .formula-box h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+        }
+
+        .formula-box .math {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .formula-explanation {
+            color: var(--text-secondary);
+            margin-top: 15px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* System Architecture */
+        .architecture-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .arch-component {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .arch-component:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
+        }
+
+        .arch-component i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .arch-component h5 {
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .arch-component p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* ML Performance Section */
+        .ml-performance {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+            align-items: center;
+        }
+
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .metric-card:hover {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+        }
+
+        .metric-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .metric-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* ML Model Details */
+        .model-techniques {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .technique-card {
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .technique-card h5 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .technique-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        /* Hardware Components */
+        .components-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .component-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 20px;
+            transition: var(--transition);
+        }
+
+        .component-item:hover {
+            border-color: var(--primary-color);
+            background: rgba(0, 212, 255, 0.02);
+        }
+
+        .component-item h5 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .component-item p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .component-spec {
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary-color);
+            padding: 6px 10px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            display: inline-block;
+            margin-right: 5px;
+            margin-top: 8px;
+        }
+
+        /* Results Box */
+        .results-highlight {
+            background: rgba(0, 212, 255, 0.1);
+            border-left: 5px solid var(--primary-color);
+            border-radius: 4px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .results-highlight h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .results-highlight ul {
+            margin-left: 20px;
+            color: var(--text-secondary);
+        }
+
+        .results-highlight li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin: 25px 0;
+        }
+
+        .tech-item {
+            background: var(--card-bg);
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Image Placeholders */
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .image-placeholder-box {
+            background: var(--card-bg);
+            border: 2px dashed var(--border-color);
+            border-radius: 8px;
+            padding: 50px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 300px;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .image-placeholder-box:hover {
+            border-color: var(--primary-color);
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .image-placeholder-box i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            opacity: 0.7;
+        }
+
+        .image-placeholder-box h4 {
+            color: var(--text-primary);
+            margin-bottom: 10px;
+            text-align: center;
+            font-size: 1.05rem;
+        }
+
+        .image-placeholder-box p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .upload-note {
+            display: inline-block;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary-color);
+            padding: 6px 12px;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .back-button:hover {
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            border-color: var(--primary-color);
+        }
+
+        /* Project Footer */
+        .project-footer {
+            margin-top: 80px;
+            padding: 60px 0;
+            border-top: 1px solid var(--border-color);
+            text-align: center;
+        }
+
+        .footer-content h3 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .footer-content p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .project-header {
+                padding-top: 100px;
+                padding-bottom: 40px;
+            }
+
+            .project-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .project-hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .project-meta {
+                gap: 15px;
+            }
+
+            .detail-section h2 {
+                font-size: 1.4rem;
+            }
+
+            .content-with-image {
+                grid-template-columns: 1fr;
+            }
+
+            .ml-performance {
+                grid-template-columns: 1fr;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .image-placeholder-box {
+                min-height: 250px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">Anujan</div>
+            <ul class="nav-menu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#experience" class="nav-link">Experience</a></li>
+                <li><a href="index.html#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html#services" class="nav-link">Services</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Project Header -->
+    <header class="project-header">
+        <div class="container">
+            <a href="index.html#projects" class="back-button">
+                <i class="fas fa-arrow-left"></i> Back to Projects
+            </a>
+            <div class="project-hero">
+                <h1>Smart LC Resonant Metal Detector and Classifier</h1>
+                <div class="subtitle">with Machine Learning Classification</div>
+                <p>A cost-effective, energy-efficient metal detection system for multi-domain industrial and safety applications using LC resonant circuit technology and neural network classification.</p>
+                <div class="project-meta">
+                    <div class="meta-item">
+                        <i class="fas fa-microchip"></i>
+                        <span>Embedded Systems</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-brain"></i>
+                        <span>Machine Learning</span>
+                    </div>
+                    <div class="meta-item">
+                        <i class="fas fa-project-diagram"></i>
+                        <span>Signal Processing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Project Content -->
+    <main class="project-detail">
+        <div class="container">
+            <!-- Overview Section -->
+            <section class="detail-section">
+                <h2><i class="fas fa-info-circle" style="margin-right: 10px;"></i>Project Overview</h2>
+                <div class="section-content">
+                    <p>
+                        This project introduces a <strong>cost-effective and energy-efficient metal detection system</strong> designed for multi-domain applications, including household appliances, recycling, and industrial quality control. Unlike traditional sensors like VLF (Very Low Frequency) or Pulse Induction systems, this innovative approach identifies metals by analyzing real-time changes in the frequency and amplitude of an <strong>LC-resonant circuit</strong>.
+                    </p>
+                    <p>
+                        The system combines analog signal conditioning with advanced machine learning to achieve high precision metal classification while maintaining exceptional energy efficiency. This makes it ideal for battery-powered and permanently-installed applications where low power consumption is critical.
+                    </p>
+
+                    <div class="results-highlight">
+                        <h4><i class="fas fa-star"></i> Project Highlights</h4>
+                        <ul>
+                            <li><strong>Classification Accuracy:</strong> 98.73% for five metal types (Aluminum, Brass, Copper, Iron, and Stainless steel)</li>
+                            <li><strong>Detection Latency:</strong> Less than 150ms from signal acquisition to classification</li>
+                            <li><strong>Power Efficiency:</strong> Significantly lower consumption than traditional metal detection systems</li>
+                            <li><strong>Real-Time Processing:</strong> Integrated Raspberry Pi for instantaneous feedback and logging</li>
+                            <li><strong>Feature Engineering:</strong> Frequency shift identified as the most discriminative feature</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Key Features -->
+            <section class="detail-section">
+                <h2><i class="fas fa-star" style="margin-right: 10px;"></i>Key Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-bullseye"></i> High Precision Classification</h4>
+                        <p>Machine Learning models distinguish between Aluminum, Brass, Copper, Iron, and Stainless Steel with optimal accuracy through advanced feature engineering.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-battery-full"></i> Low Power Consumption</h4>
+                        <p>Optimized LC circuit design ensures minimal energy usage compared to VLF or Pulse Induction systems, extending battery life significantly.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-flash"></i> Real-Time Processing</h4>
+                        <p>Integrated with Raspberry Pi for instantaneous metal identification and immediate feedback with latency under 150ms.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-cube"></i> Adaptable Design</h4>
+                        <p>Suitable for integration into washing machines (to detect coins/keys), recycling systems, or industrial sorting lines without modification.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-cogs"></i> Robust Signal Processing</h4>
+                        <p>Advanced digital filtering and normalization techniques handle environmental variations and noise for consistent performance.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-network-wired"></i> Multi-Domain Integration</h4>
+                        <p>Flexible architecture enables seamless integration into various industrial and consumer applications with minimal customization.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LC Circuit Principle -->
+            <section class="detail-section">
+                <h2><i class="fas fa-circle-nodes" style="margin-right: 10px;"></i>LC Resonant Circuit Principle</h2>
+                
+                <div class="content-with-image">
+                    <div class="content-text">
+                        <h3>Resonance Frequency Formula</h3>
+                        <div class="formula-box">
+                            <h4>Resonant Frequency</h4>
+                            <div class="math" style="text-align: center; font-size: 1.3rem;">
+                                $$f_r = \frac{1}{2\pi\sqrt{LC}}$$
+                            </div>
+                            <div class="formula-explanation">
+                                Where <strong>L</strong> is the inductance (Henry) and <strong>C</strong> is the capacitance (Farad). The system operates based on the principle that metallic objects near the sensing coil alter its inductance, causing a measurable shift in the resonant frequency.
+                            </div>
+                        </div>
+
+                        <h4>Detection Mechanism</h4>
+                        <p>
+                            When a metallic object approaches the sensing coil, its magnetic properties interact with the coil's electromagnetic field. This interaction changes the effective inductance (L) of the circuit, which directly affects the resonant frequency according to the formula above.
+                        </p>
+                        <p>
+                            Different metals have different magnetic permeabilities, causing varying degrees of inductance change. By measuring these frequency shifts and amplitude variations, the system can classify the type of metal present.
+                        </p>
+
+                        <h4>System Stages</h4>
+                        <ul>
+                            <li><strong>Sensing:</strong> Custom-wound copper coil generates a resonant oscillation at a baseline frequency</li>
+                            <li><strong>Signal Conditioning:</strong> Frequency and amplitude variations are measured and digitized by Arduino</li>
+                            <li><strong>Data Acquisition:</strong> Raw sensor data is collected and preprocessed for ML classification</li>
+                            <li><strong>Classification:</strong> ML model analyzes features to determine metal type</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-image">
+                        <img src="images/FYP_01.jpg" alt="LC Circuit Principle" style="width: 100%; border-radius: 8px; display: block;">
+                        <h4>LC Circuit Principle</h4>
+                        <p>Diagram showing the LC oscillator circuit and frequency response with metal detection</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- System Architecture -->
+            <section class="detail-section">
+                <h2><i class="fas fa-sitemap" style="margin-right: 10px;"></i>System Architecture & Methodology</h2>
+                
+                <div class="section-content">
+                    <p>
+                        The system employs a layered architecture combining analog signal processing with digital classification, enabling real-time metal identification with high accuracy and minimal power consumption.
+                    </p>
+                </div>
+
+                <h3 style="margin-top: 30px;">Hardware Architecture Layers</h3>
+                <div class="architecture-grid">
+                    <div class="arch-component">
+                        <i class="fas fa-circle-nodes"></i>
+                        <h5>Sensing Coil</h5>
+                        <p>Custom-wound copper sensing coil tuned for specific frequency response and metal detection sensitivity</p>
+                    </div>
+                    <div class="arch-component">
+                        <i class="fas fa-microchip"></i>
+                        <h5>Arduino Uno</h5>
+                        <p>8-bit microcontroller for real-time signal acquisition, conditioning, and feature extraction</p>
+                    </div>
+                    <div class="arch-component">
+                        <i class="fas fa-signal"></i>
+                        <h5>Signal Conditioner</h5>
+                        <p>Analog circuits for amplification, filtering, and normalization of sensor signals</p>
+                    </div>
+                    <div class="arch-component">
+                        <i class="fas fa-brain"></i>
+                        <h5>Raspberry Pi</h5>
+                        <p>High-performance processor running trained ML model for metal classification and logging</p>
+                    </div>
+                    <div class="arch-component">
+                        <i class="fas fa-database"></i>
+                        <h5>Data Pipeline</h5>
+                        <p>Serial communication between Arduino and Raspberry Pi for real-time data streaming</p>
+                    </div>
+                    <div class="arch-component">
+                        <i class="fas fa-terminal"></i>
+                        <h5>CLI Interface</h5>
+                        <p>Command-line interface for real-time monitoring, configuration, and result visualization</p>
+                    </div>
+                </div>
+
+                <div class="content-with-image" style="margin-top: 40px;">
+                    <div class="content-image">
+                        <img src="images/FYP_02.jpg" alt="System Block Diagram" style="width: 100%; border-radius: 8px; display: block;">
+                        <h4 style="margin-top: 15px;">System Block Diagram</h4>
+                        <p>Complete system architecture showing signal flow from sensing to classification</p>
+                    </div>
+
+                    <div class="content-text">
+                        <h4>Signal Flow Process</h4>
+                        <ol style="margin-left: 20px; color: var(--text-secondary);">
+                            <li style="margin-bottom: 15px;">
+                                <strong>Oscillation Generation:</strong> LC circuit oscillates at its natural resonant frequency
+                            </li>
+                            <li style="margin-bottom: 15px;">
+                                <strong>Metal Detection:</strong> Metallic object alters inductance, shifting frequency and amplitude
+                            </li>
+                            <li style="margin-bottom: 15px;">
+                                <strong>Signal Conditioning:</strong> Analog circuits amplify and filter the signal for digital processing
+                            </li>
+                            <li style="margin-bottom: 15px;">
+                                <strong>Data Acquisition:</strong> Arduino samples signal at 10kHz using ADC for high resolution
+                            </li>
+                            <li style="margin-bottom: 15px;">
+                                <strong>Feature Extraction:</strong> Frequency shift, amplitude, and other metrics computed in real-time
+                            </li>
+                            <li style="margin-bottom: 15px;">
+                                <strong>Classification:</strong> Raspberry Pi processes features through trained MLP model
+                            </li>
+                            <li style="margin-bottom: 15px;">
+                                <strong>Output:</strong> Metal type identified with confidence score and logged to database
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Innovation -->
+            <section class="detail-section">
+                <h2><i class="fas fa-star" style="margin-right: 10px;"></i>Core Innovation: Frequency & Amplitude-Based Classification</h2>
+                
+                <div class="section-content">
+                    <p>
+                        The fundamental breakthrough of this system is achieving high-accuracy metal classification using <strong>only frequency (ΔF) and amplitude (ΔA) variations</strong> from the LC resonant circuit, eliminating the need for an external distance sensor. This approach simplifies hardware, reduces costs, and improves reliability while maintaining exceptional classification accuracy.
+                    </p>
+                    <p>
+                        By leveraging sophisticated machine learning algorithms trained on comprehensive electromagnetic signatures, the system can distinguish between multiple metal types and even identify precious metals with near-perfect precision all from two core measurements.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Machine Learning Integration -->
+            <section class="detail-section">
+                <h2><i class="fas fa-brain" style="margin-right: 10px;"></i>Machine Learning Integration</h2>
+                
+                <div class="section-content">
+                    <p>
+                        The system employs two specialized classification models, each optimized for different detection objectives. Both models eliminate the need for distance sensors by using only frequency and amplitude variations from the LC circuit.
+                    </p>
+                </div>
+
+                <!-- Model A: Metal Type Classifier -->
+                <div style="margin-bottom: 50px;">
+                    <h3 style="border-left: 4px solid var(--primary-color); padding-left: 15px; margin-bottom: 20px;"><i class="fas fa-cube"></i> Model A: Metal Type Classifier</h3>
+                    
+                    <div class="performance-metrics">
+                        <div class="metric-card">
+                            <div class="metric-value">98.73%</div>
+                            <div class="metric-label">Classification Accuracy</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">6</div>
+                            <div class="metric-label">Metal Classes</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">Random Forest</div>
+                            <div class="metric-label">Algorithm</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">~150ms</div>
+                            <div class="metric-label">Inference Time</div>
+                        </div>
+                    </div>
+
+                    <div class="ml-performance">
+                        <div class="content-text">
+                            <h4>Model Architecture</h4>
+                            <p><strong>Algorithm:</strong> Multi-Layer Perceptron (MLP) Neural Network</p>
+                            <p><strong>Input Features:</strong> Frequency Difference (ΔF) and Amplitude Difference (ΔA)</p>
+                            <p><strong>Architecture:</strong> Input layer (2 features) → Hidden layers (2× 64 neurons with ReLU activation) → Output layer (5 classes with softmax)</p>
+
+                            <h4 style="margin-top: 25px;">Metal Classes</h4>
+                            <ul>
+                                <li><strong>Aluminum:</strong> Non-ferrous, low density, distinctive mid-range frequency response</li>
+                                <li><strong>Brass:</strong> Copper-zinc alloy, unique electromagnetic properties, strong amplitude signature</li>
+                                <li><strong>Copper:</strong> Highly conductive, strong frequency shift, excellent electrical properties</li>
+                                <li><strong>Iron:</strong> Ferrous, high magnetic permeability, strong inductive coupling</li>
+                                <li><strong>Stainless Steel:</strong> Alloy of iron, chromium, and nickel, with distinct electromagnetic signature</li>
+                                <li><strong>No-Metal:</strong> Absence detection for validation and baseline measurements</li>
+                            </ul>
+
+                            <h4 style="margin-top: 25px;">Advanced Techniques</h4>
+                            <ul>
+                                <li><strong>SMOTE (Synthetic Minority Oversampling):</strong> Handles class imbalance in training data, improving minority class recognition</li>
+                                <li><strong>Feature Engineering:</strong> Specialized features including "Amp Freq" (Amplitude-Frequency interaction) and "Freq Dist" (Frequency-based distance estimation) to optimize LC-circuit data</li>
+                                <li><strong>Normalization:</strong> Min-max scaling of features into [0, 1] range for optimal neural network convergence</li>
+                                <li><strong>Cross-Validation:</strong> 5-fold validation ensures robustness and prevents overfitting</li>
+                                <li><strong>Hyperparameter Tuning:</strong> Grid search optimization for learning rate, batch size, and network architecture</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-image">
+                            <img src="images/FYP_03.jpg" alt="Model A: Confusion Matrix" style="width: 100%; border-radius: 8px; display: block;">
+                            <h4>Model A: Confusion Matrix</h4>
+                            <p>Classification performance across all five metal types with 98.73% overall accuracy</p>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Model B: Gold Detector -->
+                <div>
+                    <h3 style="border-left: 4px solid var(--accent-color); padding-left: 15px; margin-bottom: 20px;"><i class="fas fa-gem"></i> Model B: Gold vs. Non-Gold Predictor</h3>
+                    
+                    <div class="performance-metrics">
+                        <div class="metric-card">
+                            <div class="metric-value">99.24%</div>
+                            <div class="metric-label">Classification Accuracy</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">3</div>
+                            <div class="metric-label">Classes</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">Random Forest</div>
+                            <div class="metric-label">Algorithm</div>
+                        </div>
+                        <div class="metric-card">
+                            <div class="metric-value">~120ms</div>
+                            <div class="metric-label">Inference Time</div>
+                        </div>
+                    </div>
+
+                    <div class="ml-performance">
+                        <div class="content-text">
+                            <h4>Model Architecture</h4>
+                            <p><strong>Algorithm:</strong> Random Forest Classifier (100 decision trees)</p>
+                            <p><strong>Input Features:</strong> Frequency Difference (ΔF) and Amplitude Difference (ΔA)</p>
+                            <p><strong>Specialization:</strong> Optimized for precious metal detection with near-perfect precision</p>
+
+                            <h4 style="margin-top: 25px;">Classification Classes</h4>
+                            <ul>
+                                <li><strong>Gold:</strong> Precious metal with unique high-frequency electromagnetic signature</li>
+                                <li><strong>No-Gold (Industrial Metals):</strong> Other conductive metals (Copper, Aluminum, Brass, Iron)</li>
+                                <li><strong>No-Metal:</strong> Non-metallic materials and background baseline</li>
+                            </ul>
+
+                            <h4 style="margin-top: 25px;">Technical Highlights</h4>
+                            <ul>
+                                <li><strong>Unique Electromagnetic Signatures:</strong> Gold exhibits distinctive electromagnetic properties that differ markedly from industrial metals, enabling high precision detection</li>
+                                <li><strong>Ensemble Learning:</strong> Random Forest combines multiple decision trees for robust and generalized predictions</li>
+                                <li><strong>Feature Importance:</strong> Frequency difference (ΔF) identified as the dominant discriminator (67% importance) for gold detection</li>
+                                <li><strong>Precision-Focused Training:</strong> Model prioritizes minimizing false positives for precious metal applications</li>
+                                <li><strong>Real-World Robustness:</strong> Tested across varying environmental conditions and distances</li>
+                            </ul>
+                        </div>
+
+                        <div class="content-image">
+                            <img src="images/FYP_04.jpg" alt="Model B: ROC Curve" style="width: 100%; border-radius: 8px; display: block;">
+                            <h4>Model B: ROC Curve</h4>
+                            <p>Random Forest precision-recall analysis showing 99.24% AUC for gold detection</p>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="results-highlight" style="margin-top: 40px;">
+                    <h4><i class="fas fa-lightbulb"></i> Key Insight: Dual-Model Architecture Advantage</h4>
+                    <p>
+                        By implementing two specialized models, the system achieves optimal performance for different use cases. <strong>Model A</strong> provides comprehensive metal classification for industrial applications, while <strong>Model B</strong> offers exceptional precision for precious metal detection. Both models validate the fundamental principle that <strong>frequency (ΔF) and amplitude (ΔA) variations alone are sufficient for accurate metal identification</strong>, eliminating the complexity and cost of additional distance sensors.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Hardware & Signal Flow -->
+            <section class="detail-section">
+                <h2><i class="fas fa-microchip" style="margin-right: 10px;"></i>Hardware Architecture & Signal Flow</h2>
+                
+                <div class="section-content">
+                    <p>
+                        The system employs a sophisticated two-stage processing architecture combining analog signal acquisition with digital machine learning inference. The dual-processor design optimizes cost, power consumption, and processing capability while maintaining real-time performance.
+                    </p>
+                </div>
+
+                <h3>Signal Processing Pipeline</h3>
+                <div class="ml-performance">
+                    <div class="content-text">
+                        <h4>Stage 1: Analog Signal Acquisition (Arduino Uno)</h4>
+                        <ul>
+                            <li><strong>Oscillator:</strong> NE555-based LC Resonant Circuit continuously oscillates at characteristic frequency (~34 kHz)</li>
+                            <li><strong>Coil Interaction:</strong> Proximity of metal alters LC resonance, producing frequency shift (ΔF) and amplitude change (ΔA)</li>
+                            <li><strong>Analog-to-Digital Conversion:</strong> Arduino ADC samples conditioned signals at 10 kHz for digital processing</li>
+                            <li><strong>Feature Extraction:</strong> Real-time calculation of frequency deviation and amplitude magnitude</li>
+                            <li><strong>Data Transmission:</strong> Arduino sends extracted features (ΔF, ΔA) to Raspberry Pi via UART serial interface</li>
+                        </ul>
+
+                        <h4 style="margin-top: 25px;">Stage 2: Digital Classification (Raspberry Pi 3 B+)</h4>
+                        <ul>
+                            <li><strong>Feature Reception:</strong> Receives frequency and amplitude variations from Arduino Uno</li>
+                            <li><strong>Model Selection:</strong> Loads appropriate ML model (Model A for general classification or Model B for gold detection)</li>
+                            <li><strong>Inference Execution:</strong> TensorFlow/Keras or Scikit-learn performs real-time classification inference (&lt;150ms)</li>
+                            <li><strong>Confidence Scoring:</strong> Returns predicted metal type with confidence percentage</li>
+                            <li><strong>Logging & Output:</strong> Results logged to CSV and displayed on CLI interface</li>
+                            <li><strong>Latency:</strong> Total end-to-end response time: ~150ms for real-time user feedback</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-image">
+                        <img src="images/FYP_05.jpg" alt="Experimental Setup" style="width: 100%; border-radius: 8px; display: block;">
+                        <h4>Experimental Setup</h4>
+                        <p>Complete signal flow from LC oscillator through Arduino acquisition to Raspberry Pi ML inference</p>
+                        
+                    </div>
+                </div>
+
+            <!-- Hardware Implementation -->
+            <section class="detail-section">
+                <h3>Hardware Components & Specifications</h3>
+                
+                <div class="section-content">
+                    <p>
+                        The final system consists of a carefully designed integration of analog and digital components, optimized for accuracy, efficiency, and real-world deployment in harsh industrial environments.
+                    </p>
+                </div>
+
+                <div class="components-list">
+                    <div class="component-item">
+                        <h5><i class="fas fa-wave-square"></i> NE555 LC Oscillator</h5>
+                        <p>Generates stable LC resonant oscillation at ~34 kHz. Metal proximity shifts this frequency, producing the primary detection signal.</p>
+                        <span class="component-spec">Frequency: ~34 kHz</span>
+                        <span class="component-spec">Stable & Tunable</span>
+                    </div>
+                    <div class="component-item">
+                        <h5><i class="fas fa-coil"></i> Sensing Coil</h5>
+                        <p>Custom-wound copper coil with optimized diameter and turns ratio for maximum sensitivity to metal proximity changes. Acts as the LC resonator.</p>
+                        <span class="component-spec">6 cm diameter</span>
+                        <span class="component-spec">~55 turns</span>
+                    </div>
+                    <div class="component-item">
+                        <h5><i class="fas fa-microchip"></i> Arduino Uno (Data Acquisition)</h5>
+                        <p>ATmega328P-based board for real-time signal acquisition, feature extraction (ΔF and ΔA calculation), and communication with Raspberry Pi.</p>
+                        <span class="component-spec">8-bit AVR, 16MHz</span>
+                        <span class="component-spec">ADC: 10-bit, 50kHz sampling</span>
+                    </div>
+                    <div class="component-item">
+                        <h5><i class="fas fa-raspberry-pi"></i> Raspberry Pi 3 B+ (Model Inference)</h5>
+                        <p>ARM-based processor running trained ML models (TensorFlow/Keras) for real-time metal classification and data logging.</p>
+                        <span class="component-spec">ARM Cortex-A, 1.4GHz</span>
+                        <span class="component-spec">1GB RAM, Real-time ML</span>
+                    </div>
+                    <div class="component-item">
+                        <h5><i class="fas fa-layer-group"></i> Custom PCB</h5>
+                        <p>Integrated PCB hosting oscillator circuit, signal conditioning, and ADC interface with careful layout for EMI minimization.</p>
+                        <span class="component-spec">2-layer Board</span>
+                        <span class="component-spec">30x40mm</span>
+                    </div>
+                    <div class="component-item">
+                        <h5><i class="fas fa-plug"></i> Power Supply</h5>
+                        <p>Regulated 5V DC supply with decoupling capacitors and optional battery backup for autonomous deployment.</p>
+                        <span class="component-spec">USB or 5V Battery</span>
+                        <span class="component-spec">Regulated ±0.5V</span>
+                    </div>
+                </div>
+
+                <div class="content-with-image" style="margin-top: 40px;">
+                    <div class="content-image">
+                        <img src="images/FYP_06.jpg" alt="Final Product" style="width: 100%; border-radius: 8px; display: block;">
+                        <h4>Final Product</h4>                        
+                    </div>
+
+                    <div class="content-text">
+                        <h4>Assembly & Integration</h4>
+                        <p>The hardware implementation follows standard embedded systems practices with careful attention to signal integrity and electromagnetic compatibility:</p>
+                        <ul>
+                            <li><strong>PCB Design:</strong> Multilayer board with ground planes to minimize noise and EMI</li>
+                            <li><strong>Component Placement:</strong> Signal path optimized with analog circuits away from digital logic</li>
+                            <li><strong>Shielding:</strong> Faraday cage around sensing coil to reduce external interference</li>
+                            <li><strong>Testing:</strong> Calibration at multiple frequencies and distances for accuracy validation</li>
+                            <li><strong>Robustness:</strong> Conformal coating on PCB for humidity and temperature tolerance</li>
+                            <li><strong>Casing:</strong> Durable ABS housing with cutouts for coil access and I/O connectors</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Results & Impact -->
+            <section class="detail-section">
+                <h2><i class="fas fa-chart-bar" style="margin-right: 10px;"></i>Results & Real-World Impact</h2>
+                
+                <div class="section-content">
+                    <h3>Testing Results</h3>
+                    <p>
+                        Comprehensive testing confirmed the effectiveness of the LC resonant approach for metal classification, with particular success in frequency-based discrimination.
+                    </p>
+                </div>
+
+                <div class="results-highlight">
+                    <h4><i class="fas fa-check-circle"></i> Key Findings</h4>
+                    <ul>
+                        <li><strong>Frequency Shift Dominance:</strong> Frequency difference (ΔF) is the most significant feature for metal discrimination, validating the LC resonant principle</li>
+                        <li><strong>High Accuracy:</strong> Achieved 98.73% classification accuracy across five metal types in real-world conditions</li>
+                        <li><strong>Energy Efficiency:</strong> Power consumption significantly lower than traditional VLF or Pulse Induction systems</li>
+                        <li><strong>Real-Time Performance:</strong> End-to-end latency under 150ms enables responsive real-time feedback</li>
+                        <li><strong>Robustness:</strong> System maintains performance across temperature range (-10°C to +60°C) and environmental conditions</li>
+                        <li><strong>Scalability:</strong> Architecture supports scaling to larger arrays or multi-coil configurations</li>
+                    </ul>
+                </div>
+
+                <h3 style="margin-top: 30px;">Applications & Impact</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-washing-machine"></i> Household Appliances</h4>
+                        <p><strong>Use Case:</strong> Washing machines detect coins, keys, and metal objects before damaging the drum. <strong>Impact:</strong> Prevents mechanical damage and extends appliance lifespan.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-recycle"></i> Recycling & Sorting</h4>
+                        <p><strong>Use Case:</strong> Automated sorting lines classify scrap metal by type for better material recovery. <strong>Impact:</strong> Improves recycling efficiency and material value.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-industry"></i> Industrial Quality Control</h4>
+                        <p><strong>Use Case:</strong> Production line inspection detects contamination or wrong materials. <strong>Impact:</strong> Ensures product quality and prevents defects.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-shield-alt"></i> Security & Safety</h4>
+                        <p><strong>Use Case:</strong> Metal detection at facilities to prevent unauthorized items. <strong>Impact:</strong> Enhances security with low false-positive rates.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-leaf"></i> Environmental</h4>
+                        <p><strong>Use Case:</strong> Low-power design suitable for battery-operated systems. <strong>Impact:</strong> Reduces environmental footprint and operational costs.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-graduation-cap"></i> Research & Education</h4>
+                        <p><strong>Use Case:</strong> Educational platform demonstrating LC circuits, signal processing, and ML. <strong>Impact:</strong> Bridges electronics and AI education gap.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Project Demonstration Video -->
+            <section class="detail-section">
+                <h2><i class="fas fa-video" style="margin-right: 10px;"></i>Project Demonstration</h2>
+                
+                <div class="section-content" style="margin-bottom: 30px;">
+                    <p>Watch the Smart LC Resonant Metal Detector and Classifier in action, demonstrating real-time detection and classification capabilities across various metal types.</p>
+                </div>
+
+                <div style="margin: 30px 0;">
+                    <a href="https://youtu.be/OU2oNjwl9kw" target="_blank" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white; text-decoration: none; border-radius: 8px; font-weight: 600; transition: var(--transition);">
+                        <i class="fab fa-youtube" style="margin-right: 10px;"></i>Watch Video on YouTube
+                    </a>
+                </div>
+                
+                <div style="background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 8px; padding: 20px; margin: 20px 0;">
+                    <p style="color: var(--text-secondary); margin: 0;">
+                        <strong>Video Title:</strong> Smart LC Resonant Metal Detector and Classifier Demonstration<br>
+                        <strong>Duration:</strong> Click the link above to watch on YouTube<br>
+                        <strong>Content:</strong> Real-time detection and classification of various metal types using the LC resonant circuit technology
+                    </p>
+                </div>
+            </section>
+
+            <!-- User Interface -->
+            <section class="detail-section">
+                <h2><i class="fas fa-terminal" style="margin-right: 10px;"></i>Real-Time CLI Interface</h2>
+                
+                <div class="section-content">
+                    <p>
+                        The system includes a comprehensive command-line interface running on Raspberry Pi, enabling real-time monitoring, configuration, and result visualization for researchers and operators.
+                    </p>
+                </div>
+
+                <div class="content-with-image" style="margin-top: 40px;">
+                    <div class="content-text">
+                        <h4>CLI Features</h4>
+                        <ul>
+                            <li><strong>Real-Time Display:</strong> Live frequency, amplitude, and distance readings updated continuously</li>
+                            <li><strong>Classification Output:</strong> Detected metal type with confidence score displayed immediately</li>
+                            <li><strong>Data Logging:</strong> All detections automatically logged to CSV for analysis and audit trail</li>
+                            <li><strong>Calibration Tools:</strong> Interactive calibration mode to adjust baseline frequency and sensitivity</li>
+                            <li><strong>Model Management:</strong> Load, switch, and monitor different trained ML models</li>
+                            <li><strong>Statistics:</strong> Real-time accuracy metrics and confusion matrix visualization</li>
+                            <li><strong>Configuration:</strong> Adjust thresholds, sampling rates, and output parameters on-the-fly</li>
+                        </ul>
+
+                        <h4 style="margin-top: 25px;">Data Logging & Analytics</h4>
+                        <p>
+                            The system automatically logs all detections including timestamp, detected metal type, confidence score, and raw signal metrics. This enables:
+                        </p>
+                        <ul>
+                            <li>Historical analysis of detection patterns</li>
+                            <li>Model performance validation over time</li>
+                            <li>Troubleshooting and debugging</li>
+                            <li>Integration with external analytics platforms</li>
+                        </ul>
+                    </div>
+
+                    <div class="content-image">
+                        <img src="images/FYP_07.jpg" alt="Display Interface" style="width: 100%; border-radius: 8px; display: block;">
+                        <h4>Display Interface</h4>
+                        <p>Real-time monitoring dashboard showing live sensor data and classification results</p>
+                        
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technology Stack -->
+            <section class="detail-section">
+                <h2><i class="fas fa-code" style="margin-right: 10px;"></i>Technology Stack</h2>
+                
+                <h3>Hardware Technologies</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">Arduino Uno</div>
+                    <div class="tech-item">Raspberry Pi</div>
+                    <div class="tech-item">ATmega328P</div>
+                    <div class="tech-item">LC Circuit Design</div>
+                    <div class="tech-item">Analog Signal Conditioning</div>
+                    <div class="tech-item">Custom PCB Design</div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Software Technologies</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">Python</div>
+                    <div class="tech-item">TensorFlow/Keras</div>
+                    <div class="tech-item">Scikit-learn</div>
+                    <div class="tech-item">NumPy & Pandas</div>
+                    <div class="tech-item">Signal Processing (SciPy)</div>
+                    <div class="tech-item">C/C++ (Arduino)</div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Development Tools</h3>
+                <div class="tech-stack">
+                    <div class="tech-item">Arduino IDE</div>
+                    <div class="tech-item">Jupyter Notebook</div>
+                    <div class="tech-item">Proteus Simulation</div>
+                    <div class="tech-item">Python Flask</div>
+                    <div class="tech-item">Git Version Control</div>
+                    <div class="tech-item">Serial Debugging Tools</div>
+                </div>
+            </section>
+
+            <!-- Comparison Section -->
+            <section class="detail-section">
+                <h2><i class="fas fa-balance-scale" style="margin-right: 10px;"></i>Comparison with Traditional Methods</h2>
+                
+                <div class="section-content">
+                    <p>
+                        This LC resonant approach offers several advantages over conventional metal detection technologies:
+                    </p>
+                </div>
+
+                <div style="overflow-x: auto; margin: 30px 0;">
+                    <table style="width: 100%; border-collapse: collapse; color: var(--text-secondary);">
+                        <thead>
+                            <tr style="background: var(--card-bg);">
+                                <th style="border: 1px solid var(--border-color); padding: 15px; text-align: left; color: var(--primary-color); font-weight: 600;">Feature</th>
+                                <th style="border: 1px solid var(--border-color); padding: 15px; text-align: left; color: var(--primary-color); font-weight: 600;">LC Resonant (This Project)</th>
+                                <th style="border: 1px solid var(--border-color); padding: 15px; text-align: left; color: var(--primary-color); font-weight: 600;">VLF Method</th>
+                                <th style="border: 1px solid var(--border-color); padding: 15px; text-align: left; color: var(--primary-color); font-weight: 600;">Pulse Induction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: rgba(0, 212, 255, 0.02);">
+                                <td style="border: 1px solid var(--border-color); padding: 15px;"><strong>Power Consumption</strong></td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Very Low (~100mW)</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Moderate (~500mW)</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">High (~2W)</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;"><strong>Metal Classification</strong></td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">5+ Types with ML</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Basic (Ferrous/Non-ferrous)</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Limited (Size-based)</td>
+                            </tr>
+                            <tr style="background: rgba(0, 212, 255, 0.02);">
+                                <td style="border: 1px solid var(--border-color); padding: 15px;"><strong>Cost</strong></td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Low ($50-150)</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Moderate ($200-500)</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">High ($500+)</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;"><strong>Detection Range</strong></td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">0-10cm (Optimal for close contact)</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">5-30cm (Moderate range)</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">10-50cm (Long range)</td>
+                            </tr>
+                            <tr style="background: rgba(0, 212, 255, 0.02);">
+                                <td style="border: 1px solid var(--border-color); padding: 15px;"><strong>Processing Speed</strong></td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">&lt;150ms with ML</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">50-100ms (simple logic)</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">200-500ms</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;"><strong>EMI Resistance</strong></td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Good (Tuned frequency)</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Moderate</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Excellent</td>
+                            </tr>
+                            <tr style="background: rgba(0, 212, 255, 0.02);">
+                                <td style="border: 1px solid var(--border-color); padding: 15px;"><strong>Adaptability</strong></td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Excellent (ML-based)</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Good</td>
+                                <td style="border: 1px solid var(--border-color); padding: 15px;">Limited</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Future Work -->
+            <section class="detail-section">
+                <h2><i class="fas fa-rocket" style="margin-right: 10px;"></i>Future Enhancements & Research</h2>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h4><i class="fas fa-network-wired"></i> Multi-Frequency Sensing</h4>
+                        <p>Implement swept frequency analysis across a wider range for improved metal type discrimination and distance estimation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-cube"></i> Deep Learning Models</h4>
+                        <p>Transition from MLP to CNN or LSTM architectures to capture temporal patterns in frequency responses.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-robot"></i> Automated Calibration</h4>
+                        <p>Implement self-calibrating algorithms that adapt to different coil sizes and environmental conditions without manual intervention.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-wifi"></i> IoT Integration</h4>
+                        <p>Add wireless connectivity (WiFi/Bluetooth) for remote monitoring and cloud-based analytics.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-microchip"></i> FPGA Implementation</h4>
+                        <p>Deploy signal processing on FPGA for ultra-low latency and parallelized computation.</p>
+                    </div>
+                    <div class="feature-card">
+                        <h4><i class="fas fa-microscope"></i> Advanced Materials</h4>
+                        <p>Research novel coil materials and geometries for improved sensitivity and broader frequency response.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Image Placeholders Section -->
+            <section class="detail-section">
+                <h2><i class="fas fa-images" style="margin-right: 10px;"></i>Project Gallery & Documentation</h2>
+                <p style="color: var(--text-secondary); margin-bottom: 30px;">
+                    Comprehensive visual documentation of the LC resonant metal detector system DATA set performance.
+                </p>
+
+                <div class="image-grid">
+                    <div class="image-placeholder-box">
+                        <img src="images/FYP_08.jpg" alt="Frequency Response" style="width: 100%; border-radius: 8px; display: block;">
+                        <h4>Frequency Response</h4>
+                        <p>Graph shows that at a fixed distance, different metals with different sizes produce clearly distinct frequency-shift ranges, improving reliable metal classification.</p>
+                    </div>
+
+                    <div class="image-placeholder-box">
+                        <img src="images/FYP_09.jpg" alt="Amplitude Response" style="width: 100%; border-radius: 8px; display: block;">
+                        <h4>Amplitude Response</h4>
+                        <p>Graph shows that different metals cause distinct amplitude reductions at a fixed distance, enabling clear and reliable metal differentiation.</p>
+                    </div>
+
+                    <div class="image-placeholder-box">
+                        <img src="images/FYP_10.jpg" alt="Frequency × Amplitude Response" style="width: 100%; border-radius: 8px; display: block;">
+                        <h4>Frequency × Amplitude Response</h4>
+                        <p>The combined feature clearly separates stainless steel from other metals, enabling reliable classification.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contact / Footer Section -->
+            <section class="project-footer">
+                <div class="footer-content">
+                    <h3>Interested in Collaboration?</h3>
+                    <p>Would like to discuss implementation, customization, or potential applications of this technology?</p>
+                    <a href="index.html#contact" class="btn btn-primary">Get In Touch</a>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
